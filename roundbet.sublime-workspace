@@ -152,26 +152,61 @@
 	"buffers":
 	[
 		{
-			"file": "package.json",
+			"contents": "'use strict'\n// Ionic Starter App\n\n// angular.module is a global place for creating, registering and retrieving Angular modules\n// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)\n// the 2nd parameter is an array of 'requires'\n// 'starter.services' is found in services.js\n// 'starter.controllers' is found in controllers.js\nangular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])\n\n.run(function($ionicPlatform) {\n  $ionicPlatform.ready(function() {\n    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard\n    // for form inputs)\n    if(window.cordova && window.cordova.plugins.Keyboard) {\n      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);\n    }\n    if(window.StatusBar) {\n      // org.apache.cordova.statusbar required\n      StatusBar.styleDefault();\n    }\n  });\n})\n\n.config(function($stateProvider, $urlRouterProvider) {\n\n  // Ionic uses AngularUI Router which uses the concept of states\n  // Learn more here: https://github.com/angular-ui/ui-router\n  // Set up the various states which the app can be in.\n  // Each state's controller can be found in controllers.js\n  $stateProvider\n\n    // setup an abstract state for the tabs directive\n    .state('tab', {\n      url: '/tab',\n      abstract: true,\n      templateUrl: 'templates/tabs.html'\n    })\n\n    // Each tab has its own nav history stack:\n\n    .state('tab.dash', {\n      url: '/dash',\n      views: {\n        'tab-dash': {\n          templateUrl: 'templates/tab-dash.html',\n          controller: 'DashCtrl'\n        }\n      }\n    })\n\n    .state('tab.friends', {\n      url: '/friends',\n      views: {\n        'tab-friends': {\n          templateUrl: 'templates/tab-friends.html',\n          controller: 'FriendsCtrl'\n        }\n      }\n    })\n    .state('tab.friend-detail', {\n      url: '/friend/:friendId',\n      views: {\n        'tab-friends': {\n          templateUrl: 'templates/friend-detail.html',\n          controller: 'FriendDetailCtrl'\n        }\n      }\n    })\n\n    .state('tab.account', {\n      url: '/account',\n      views: {\n        'tab-account': {\n          templateUrl: 'templates/tab-account.html',\n          controller: 'AccountCtrl'\n        }\n      }\n    });\n\n  // if none of the above states are matched, use this as the fallback\n  $urlRouterProvider.otherwise('/tab/dash');\n\n});\n\n",
+			"file": "www/js/app.js",
+			"file_size": 2382,
+			"file_write_time": 130523270930000000,
 			"settings":
 			{
-				"buffer_size": 546,
+				"buffer_size": 2382,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "test/karma.conf.js",
+			"file": "www/templates/tabs.html",
 			"settings":
 			{
-				"buffer_size": 1707,
+				"buffer_size": 730,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "gulpfile.js",
+			"file": "www/templates/tab-friends.html",
 			"settings":
 			{
-				"buffer_size": 645,
+				"buffer_size": 267,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/templates/tab-account.html",
+			"settings":
+			{
+				"buffer_size": 120,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/templates/friend-detail.html",
+			"settings":
+			{
+				"buffer_size": 395,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/js/services.js",
+			"settings":
+			{
+				"buffer_size": 570,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/js/controllers.js",
+			"settings":
+			{
+				"buffer_size": 380,
 				"line_ending": "Unix"
 			}
 		}
@@ -255,7 +290,14 @@
 	},
 	"file_history":
 	[
+		"/Users/nonnycode/Documents/startup/roundbet/untitled",
+		"/Users/nonnycode/Documents/startup/roundbet/package.json",
+		"/Users/nonnycode/Documents/startup/roundbet/README.md",
+		"/Users/nonnycode/Documents/startup/roundbet/ionic.project",
+		"/Users/nonnycode/Documents/startup/roundbet/test/karma.conf.js",
 		"/Users/nonnycode/Documents/startup/roundbet/test/unit/controllersSpec.js",
+		"/Users/nonnycode/Documents/startup/roundbet/gulpfile.js",
+		"/Users/nonnycode/Documents/startup/roundbet/bower.json",
 		"/Users/nonnycode/Documents/startup/roundbet/test/unit/directivesSpec.js",
 		"/Users/nonnycode/Documents/startup/roundbet/test/unit/filterSpec.js",
 		"/Users/nonnycode/Documents/startup/roundbet/test/unit/servicesSpec.js"
@@ -308,11 +350,171 @@
 			[
 				{
 					"buffer": 0,
-					"file": "package.json",
+					"file": "www/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 546,
+						"buffer_size": 2382,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2286,
+								2286
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 998.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "www/templates/tabs.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 730,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								554,
+								554
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "www/templates/tab-friends.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 267,
 						"regions":
 						{
 						},
@@ -373,9 +575,7 @@
 								"bh_square_open",
 								"bh_square_close"
 							],
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -384,20 +584,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "test/karma.conf.js",
+					"buffer": 3,
+					"file": "www/templates/tab-account.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1707,
+						"buffer_size": 120,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1707,
-								1707
+								0,
+								0
 							]
 						],
 						"settings":
@@ -450,10 +650,7 @@
 								"bh_square_open",
 								"bh_square_close"
 							],
-							"open_with_edit": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -462,20 +659,101 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "gulpfile.js",
+					"buffer": 4,
+					"file": "www/templates/friend-detail.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 645,
+						"buffer_size": 395,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								645,
-								645
+								395,
+								395
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "www/js/services.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 570,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								493,
+								493
 							]
 						],
 						"settings":
@@ -531,6 +809,87 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 15.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "www/js/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 380,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57,
+								57
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -558,16 +917,36 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
+				2
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
 		[
 			0.0,
+			0.5,
 			1.0
 		]
 	},

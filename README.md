@@ -1,10 +1,21 @@
 Ionic App Base
 =====================
 
+## Base your App of this project.
+
+
+
+
 A starting project for Ionic that optionally supports
 using custom SCSS.
 
 ## Using this project
+
+Git clone the repository.
+`git checkout initial-setup`
+run `npm install`
+change the names in `package.json` to reflect your own app.
+run `gulp install` to update ionic to the latest version. if need be.
 
 We recommend using the `ionic` utility to create new Ionic projects that are based on this project but use a ready-made starter template.
 
