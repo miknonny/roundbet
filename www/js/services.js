@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.services', [])
+angular.module('roundbet.services', [])
 
 /**
  * A simple example service that returns some data.
