@@ -33,21 +33,35 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
 
     .state('home.login', {
       url:'/login',
-      templateUrl: 'login.html',
-      controller: 'LoginCtrl'
+      views: {
+        'home-login': {
+          templateUrl: 'login.html',
+          controller: 'LoginCtrl'
+        }
+      }
     })
 
     .state('home.signup', {
       url:'/signup',
-      templateUrl: 'signup.html',
-      controller: 'SignupCtrl'
+      views: {
+        'home-signup': {
+          templateUrl: 'signup.html',
+          controller: 'SignupCtrl'
+        }
+      }
     });
   
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/home/login');
+  
   // .state('', {
   //     url:'',
-  //     templateUrl: '',
-  //     controller: ''
+  //     view: {
+  //       '': {
+  //         templateUrl: '',
+  //         controller: ''
+  //       }
+  //     }
   //   });
+
 });
 
