@@ -1,0 +1,256 @@
+1. ui router backstory.
+2. current option, nrRoute, module.
+3. Compare ngroute and ui.router.
+4. Nested states.
+5. state activation.
+6. How to activate a state.
+7. state urls
+8. Multiple named views.
+9. Abstract state.
+10. Challenges
+11. resources.
+
+
+
+-> ui rounter module contains $sateProvider and $urlRouterProvider
+
+Comparing rounter and state.
+A state is place within your app.
+A router is like a url within your app.
+
+In states thereis a nested hierachy you can have children and parents but in routes you just have a flat hierachy. you can go from one route to the next.
+
+Note that the name of a state is just a name like 'contacts' but in routes the name could be a url like '/contacts';
+
+you can navigate to a state by its name or the url.
+but in route you can navigate by its url only.
+
+
+in states you can have multiple views(ui-view) that can live at the same level. but with routes you can have only a single view using ng-view.
+
+state can populate any view but with route you populate the one view that you get.
+
+states can populate the parts of your application and also the diffrent quadrants of your screen. but with routes you are on your own to use directives to populate the different parts of your application.
+
+Now lets assume the both of them
+
+
+
+$stateProvider
+    .state('home', {
+      url: '/home',
+      abstract: true,
+      templateUrl: 'templates/home.html'
+    })
+
+ $routeProvider.when('/contacts/:id' {
+ 	template: 'hello',
+ 	templateUrl: contacts.html,
+ 	controllers: Myctrl
+ })
+
+note that in ngroute, when is the main method for adding routes.  
+In ui.router it is just for creating redirect.
+
+make sure to add UI-router to your head and include it as a dependecy top your module.
+
+Nesting is the main feature of ui routeer.
+
+
+A typical use case for nesting.
+we could have an index.html file. we can have a list to the right side of the document using the ui-view. and when i clickk i want to see the content of each item to the right still using the view that i described.
+
+Note here that we went from a list to a list.detail and this nesting means that we do not have to reload the whole page we only have to reload what has changed on the page.
+
+
+Note that for deeply nested state the dot notation can become difficult to read and this can be rewritten.
+    .state('home.signup', {
+      url:'/signup',
+      templateUrl: 'signup.html',
+      controller: 'SignupCtrl'
+    });
+
+Note that we have now assigned the parent property a property of home.
+    .state('signup', {
+      url:'/signup',
+      templateUrl: 'signup.html',
+      controller: 'SignupCtrl',
+      parent: 'home'
+    });
+We should consider this if we have states that are more than five states deep.
+
+Object based state is another alternative for deep linked states.
+
+var home = {
+	state: 'home',
+	templateUrl = contact.html
+}
+
+var signup = {
+	state: 'signup.html',
+	parent: 'home',
+	templateUrl: signup.html
+}
+
+$stateProvider
+	.state('home')
+	.state('signup')
+
+Inheritance.
+
+Inheritance.
+Child states always inherit from their parent state.
+
+
+note that we can use the data property to stare anything that is custom.
+
+
+$stateProvider
+	.state('parent', {
+		data: {
+		customdata1: 'hello',
+		customdata2: 'world'
+		};
+	})
+
+	.state('child', {
+		// custom data one is inherited from the parent but // will overite customdata2
+		customData2: UI-Router
+	});
+
+$rootScope.$on('$stateChangeStart',
+	function (event, toState)) {
+		var greeting = tostate.data.custom1 + " " + toState.data.custom2;
+		console.log(greeting);
+	}
+
+Activating a state. 
+
+What happens when a state is activated ?
+
+1. first it is going to merge any option we define with the default option.
+
+2. secondly it is going to see if the state is defined or else it will broadcast $stateNotFound.
+
+3. it will merge the parameters of that state with all the ancestor parameters.
+
+4. next it will figure out which states are changing and which arent. note that if we are going to thesame state and no parameters have changed, there will be no transiction except we have set a reload to true.
+
+5. Next it will broadcast $stateChangeStart.
+
+6. Next it resolves all the locals for the newly activated state. once those locals are resolved that is when the real transition actually begins.
+
+
+Activating a chid state.
+Scenario 1: jump right into your app with  url of:
+/contacts/1/edit.
+1. activate implicit root state.
+2. Activate the contact state.
+3. Activate the contact.detail.
+4. activate the contact.detail.edit
+
+
+Scenario2: from there we click contact 2.
+1. edit the contact.detail.edit state
+2. exit the contact.detail
+3. Activate the contact.detail for contact2.
+
+Callbacks.
+You can register an onEnter and an onExit for your scope.
+	
+$stateProvider
+	.state('contact', {
+		template: '<p>hello</p>',
+		resolve:
+		controller: myCtrl
+	}),
+	onEnter: function (title) {
+		if (title) {... do something ...}
+	},
+	onExit: function (title) {
+		if (title) {... do something ...} 
+	};
+
+
+How to activate a state.
+there are three ways to activate a state.
+
+There are 3 ways to activate a state.
+1. state.go()
+2. using the s-ref
+3. you can manually navigate to the state urls manually.
+
+
+1. $state.go();
+This is the programmatic way to naviagate to scope.
+
+myApp.controller('contactCtrl', ['$scope', '$state',
+	function ($scope, $state) {
+		$state.go('contact.details', {id: selectedId})
+	};
+]);
+
+this is how it is done on controllers, your on enters and handlers.
+
+parameters for state.go()
+1. state name
+2. state parameters.
+3. options
+
+Relative Navigation.
+
+We can move relative to the current state.
+by using special characters.
+^ is up.
+. is down
+
+UI-sref
+This is a directive that comes with the state router.
+it stands for state reference and is used in place of href.
+
+<a ui-sref="home"></a>
+
+This is really nice because if you change your urls later on.
+You do not have to go and change them  in  your application.
+
+Note that behind the scenes if does compile to the href.
+
+<a ui-sref="home" href="#/home">home</a>
+
+
+You can also passing parameters to ui-sref.
+
+<li ng-repeat="contact in contacts"> 
+	<a ui-sref="contact.detail({ id: contact.id })">
+</li>
+
+we can also use relative paths.
+<a ui-sref='^'>
+
+
+Nested Urls go handsomely with nested state urls.$stateProvider
+	.state('contacts', {
+		urls: '/contacts'
+	});
+	.state('contacts.list', {
+		urls: '/lsit'
+	});
+We can also prepend the list with '^' careful not to shot
+yourself on the foot.
+
+.state('contact.list', {
+	url: '^list'
+})
+this navigates to #/list instead of #/contacts/list.
+This means that you can have nested states with out having their routes be nested.
+
+even through the list is a child its route feels like a top tier url.
+
+note that if your state is nested 3 levels deep. the '^' will
+still start at the root.
+
+Extracting url parameters.
+urls: '/contacts/:contactId'
+urls: '/contact/{contactId}'
+
+
