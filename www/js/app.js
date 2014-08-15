@@ -25,12 +25,31 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    
+    // This state can not be accessed directly but can be
+    // activated by selecting any of its child state.
+    // child state also inherit scopes defined on its controllers
+    // also its custom data.
     .state('home', {
       url: '/home',
       abstract: true,
-      templateUrl: 'templates/home.html'
+      templateUrl: 'templates/home.html',
+      controller: ''
     })
 
+    // This is showsup when the user launches the application.
+    // also contains the link for the two states login and signup
+    .state('home.welcome', {
+      url:'/welcome',
+      view: {
+        'home-welcome': {
+          templateUrl: '',
+          controller: ''
+        }
+      }
+    })
+
+    // Activated when the Login link is clicked.
     .state('home.login', {
       url:'/login',
       views: {
@@ -41,6 +60,8 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
       }
     })
 
+
+    // Activated when the  Signup link is clicked.
     .state('home.signup', {
       url:'/signup',
       views: {
