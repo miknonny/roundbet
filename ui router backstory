@@ -249,8 +249,203 @@ even through the list is a child its route feels like a top tier url.
 note that if your state is nested 3 levels deep. the '^' will
 still start at the root.
 
-Extracting url parameters.
+URL Parameters
+
+
+Basic parameters
 urls: '/contacts/:contactId'
 urls: '/contact/{contactId}'
+
+Regex Parametes
+The curly bracket syntax is realy useful if you are doing regex.
+
+this one looks for a contactId that is a hexadecimal.
+urls: '/contact/{contactId:{0-9a-fA-F}{1,0}}'
+
+Query Parameters.
+
+urls: '/contacts?contactId&contactRegion'
+
+
+
+$stateParams.
+When we activate a state via url and the url has parameters then the stateParams is going to get populated with those values.
+
+
+State url
+url: '/users/:id/details/{type}/{repeat: [0-9]+}?from&to' 
+
+
+// Navigate to.
+'/users/123/detail//0'
+
+State params will be.
+
+{id: '123', type: '', repeat:'0' };
+
+//Navigate to
+'/users/123/details/default/0?from=there&to=here'
+
+// $stateParams will be 
+
+{id: 123, type: default, repeat:0 , from: 'here', to: 'here'}
+
+Now if i do navigate and passing all the parameters it will populate them all out.
+
+			stateParams Caveats
+$stateParams is only activated when the state is activated and all the dependencies are resolved.
+
+
+Multiple Named views.
+
+Pros.
+- provides flexibility
+- you get to have multiple views in any template.
+- Great for singleton top level component. (side panel modal.
+- many devs put them to great use.
+
+
+Cons.
+- They are often unnecssary trying to next first.
+- leading cause of confusion.
+- They can lead to anti patterns.
+
+Quick concept.
+By default this is a root state that is always active.
+{
+	name: '',
+	url: '*',
+	'abstract': true
+};
+
+No name
+url is absolute root.
+Can't activate it directly.
+Most important: its "template" is your index.html
+
+
+for example you can not access the tab.html directly but you can access the different tabs that are in the tab.html. you can not access the friends tab and the account tab at once. only one view can be present at a time.
+
+this is useful in templates in which two views can not co-exist in one template at thesame time. only one is called at a time.
+
+Naming views.
+This is mandatory if you have two or more views that are leaving at thesame level.
+
+<div ui-view="main">
+<div ui-view="sidenav">
+
+
+Configure Multiple Views.
+Use the views config object.
+
+Each key is a view name and each value is a view config object.
+
+$stateProvider
+	.state('deep.down.state.mainbits', {
+		url: "url/still/goes/up/here",
+		view: {
+			'main@': { ... },    //main view at root state
+			'sidenav@': { ... }  // sidenav at root state.
+		}
+	});
+
+View Name.
+Can use absolute or relative naming.
+
+Relative(always parent)
+'main' - 'main' view in the parent template.
+'' - unamed view in the parent template.
+
+Absolute.
+'list@contacts' - 'list' view in 'contacts' state's template.
+'list@' list view in index.html. Notice that the right side is empty and this is saying the root, the unamed state. the state that shall remain unamed.
+
+'@'- this targets the unamed view in index.html
+
+
+Very important for designing views.
+1. what quadrants(views) are depenent on other quadrants.
+if it depends on it then  nest it inside the other one.
+
+Are multiple quadrants dependent on thesame parent.
+And do the quadrants really need to be seperated.
+
+Abstract state.
+This is a state that can not be directly activated.
+
+They can have children and can become activated implicity when any of its children are activated.
+
+They are a great place to do work. this is a sort of like a common umbrella for work that needs to be done.
+
+
+Abstract state Usages.
+
+- to prepend a url to its child state urls.
+- To set a template its child state will activate.
+ optionally assign a controller to the template.
+- provide scope properties and methods for children to inherit.
+- Resolve dependencies for child states.
+- To set custom data for child state or event to use.
+- To run an onEnter or an onExit function.
+- Any combination of the above.
+
+Note that the abtstact will need its own ui-view if the child state decides to populate it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
