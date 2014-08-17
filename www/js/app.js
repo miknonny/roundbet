@@ -6,7 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services'])
+angular.module('roundbet', ['ionic', 'roundbet.controllers', 'roundbet.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,6 +30,9 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
     // activated by selecting any of its child state.
     // child state also inherit scopes defined on its controllers
     // also its custom data.
+    // The parent template for the home is index.html
+    // All templateUrls are written relative to index.html and
+    // not relative to app.js.
     .state('home', {
       url: '/home',
       abstract: true,
@@ -43,7 +46,7 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
       url:'/welcome',
       view: {
         'home-welcome': {
-          templateUrl: '',
+          templateUrl: 'templates/welcome.html',
           controller: ''
         }
       }
@@ -54,7 +57,7 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
       url:'/login',
       views: {
         'home-login': {
-          templateUrl: 'login.html',
+          templateUrl: 'templates/login.html',
           controller: 'LoginCtrl'
         }
       }
@@ -66,13 +69,13 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'starter.services']
       url:'/signup',
       views: {
         'home-signup': {
-          templateUrl: 'signup.html',
+          templateUrl: 'templates/signup.html',
           controller: 'SignupCtrl'
         }
       }
     });
   
-  $urlRouterProvider.otherwise('/home/login');
+  $urlRouterProvider.otherwise('/home/welcome');
   
   // .state('', {
   //     url:'',
