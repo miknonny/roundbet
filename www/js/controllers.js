@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('roundbet.controllers', [])
-	
-	// This controls the Home page.
-	.controller('HomeCtrl', ['$scope', function(){
+
+	// This controls the Welcome page.
+	.controller('WelcomeCtrl', ['$scope', function () {
 		
 	}])
 
@@ -13,7 +13,7 @@ angular.module('roundbet.controllers', [])
 	}])
 
 	// This controlls the Signup page
-	.controller('SigupCtrl', ['$scope', function(){
+	.controller('SignupCtrl', ['$scope', function(){
 		
 	}]);
 

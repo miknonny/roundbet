@@ -36,18 +36,17 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'roundbet.services'
     .state('home', {
       url: '/home',
       abstract: true,
-      templateUrl: 'templates/home.html',
-      controller: ''
+      templateUrl: 'templates/home.html'
     })
 
     // This is showsup when the user launches the application.
     // also contains the link for the two states login and signup
     .state('home.welcome', {
       url:'/welcome',
-      view: {
+      views: {
         'home-welcome': {
           templateUrl: 'templates/welcome.html',
-          controller: ''
+          controller: 'WelcomeCtrl'
         }
       }
     })
@@ -64,22 +63,25 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'roundbet.services'
     })
 
 
+
+
     // Activated when the  Signup link is clicked.
     .state('home.signup', {
       url:'/signup',
       views: {
         'home-signup': {
           templateUrl: 'templates/signup.html',
-          controller: 'SignupCtrl'
+          //controller: 'SignupCtrl'
         }
       }
     });
   
+  // Restart App each time you change default route.
   $urlRouterProvider.otherwise('/home/welcome');
   
   // .state('', {
   //     url:'',
-  //     view: {
+  //     views : {
   //       '': {
   //         templateUrl: '',
   //         controller: ''
