@@ -1,0 +1,12 @@
+Round Bet notes.
+
+There can be only one ion-view. unless you explicity specify which part of the screen that you want to the view to occupy.
+
+ion-tab are dependent on state activation inorder to function. so you have to include either href or ui-sref.
+
+If you have <ion-nav-view> in the parent template, you do not need to include it in the child templates as this is often a cause of error in scripts.
+
+Do not add the title tag in the ion-nav-view,  add it in the ion-view for each template to be rendered.
+
+
+
