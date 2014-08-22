@@ -14,6 +14,19 @@ Do not add the title tag in the ion-nav-view,  add it in the ion-view for each t
 
 - Adding two templates in one parent. This can not work as it tries to render both at thesame time. for example i tried to add <ion-nav-view> for welcome page and login on thesame home.htm templates.
 
+-More on adding two templates in one parent.
+You can add two templated in one parent by using the script tag. As this templates will no longger have the homw template as their base template. everything will be included in the script.
+
+_Adding name tag to ion-nav-view.
+Name tags should be added to ion-nav-view and not the ion-view.
+naming of views in our config are necessary when we need to have differnet views on different parts of our page.
+
+-The views object in .state is used to add multiple views to one template. This allows you to split your page and render different views on different locations of your page.
+
+
+
+
+
 
 
 

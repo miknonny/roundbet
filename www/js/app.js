@@ -43,37 +43,22 @@ angular.module('roundbet', ['ionic', 'roundbet.controllers', 'roundbet.services'
     // also contains the link for the two states login and signup
     .state('home.welcome', {
       url:'/welcome',
-      views: {
-        'home-welcome': {
-          templateUrl: 'templates/welcome.html',
-          controller: 'WelcomeCtrl'
-        }
-      }
+      templateUrl: 'templates/welcome.html',
+      controller: 'WelcomeCtrl'
     })
 
     // Activated when the Login link is clicked.
     .state('home.login', {
       url:'/login',
-      views: {
-        'home-login': {
-          templateUrl: 'templates/login.html',
-          controller: 'LoginCtrl'
-        }
-      }
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
     })
-
-
-
 
     // Activated when the  Signup link is clicked.
     .state('home.signup', {
       url:'/signup',
-      views: {
-        'home-signup': {
-          templateUrl: 'templates/signup.html',
-          //controller: 'SignupCtrl'
-        }
-      }
+      templateUrl: 'templates/signup.html',
+      controller: 'SignupCtrl'
     });
   
   // Restart App each time you change default route.
