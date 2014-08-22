@@ -391,9 +391,146 @@ Abstract state Usages.
 
 Note that the abtstact will need its own ui-view if the child state decides to populate it.
 
+RESOLVES.
+This is used to provide content or data that is custom to our state. belongs only to a state.
+-its an optional map of dependencies injected into our controller.
+
+- if any of the dependencies is a promise like a http request. these http request will be resolved before the controller is instantited.
+
+- The resolve consist of a key, value(factory) pair.
+-  The key is the name of the dependency to be injected into our controller.
+- factory value(string or function)
+if the value is string then it an alias for a service.
+if function the return value is what is mapped to the key.
+- the resolved object is injected as a parameter to the controller.
+
+$stateProvider.state('myState', {
+	resolve: {
+	// function with simple return value. resolves immedialtey since 
+	// not promise it resolves immediately.
+	simpleObj: function () {
+		return {value: 'simple!'};
+	},
+	
+	// An example of a function that returns a promise. You need to 
+	// inject the service that you are using. 
+	proimiseObj: function ($http) {
+		return $http({method:'GET', url: '/someurl'})
+	},
+
+	//Another promise example with the then function.
+	proimiseObj: function ($http) {
+		return $http({method:'GET', url: '/someurl'})
+			.then (function (data) {
+				return doSomeStuffFirst(data);
+			});
+	},
+	
+	// here we are using a service by name as string. it will return a // promise like the previos example.
+	// translations: 'translations'
+
+	// Another use off resolve.
+
+	greeting: function ($q, $timeout) {
+		var deferred = q.defer();
+		$timeout(function () {
+			deferred.resolve('hello!')
+		}, 1000)
+		return deferred.promise;
+	}
+
+	controller: function ($scope, simpleObj, promiseObj, promiseObj2, translations) {
+		$scope.simple = simpleObj.value;
+
+		//promise objects are ready to use.
+		$scope.items = promiseObj.items;
+		$scope.items = promiseObj2.items;
+
+		$scope.title = translations.getLang("english").title;
+		$scope.title = translations2.title;
+
+		$scope.greetings = greetings;
+	}
+})
 
 
+ATTACHING CUSTOM DATA TO STATE OBJECTS.
+this example shows an object based and a string based template.
+var contacts = { 
+    name: 'contacts',
+    templateUrl: 'contacts.html',
+    data: {
+        customData1: 5,
+        customData2: "blue"
+    }  
+}
 
+
+$stateProvider
+  .state(contacts)
+  .state('contacts.list', {
+    templateUrl: 'contacts.list.html',
+    data: {
+        customData1: 44,
+        customData2: "red"
+    } 
+  })
+- this is how the data will be accessed.
+function Ctrl($state){
+    console.log($state.current.data.customData1) // outputs 5;
+    console.log($state.current.data.customData2) // outputs "blue";
+}
+
+onEnter and onExit Callbacks.
+This are callbacks that are called when a state becomes active and inactive respectively.
+this callbacks have access to all resolved dependencies.
+
+$stateProvider.state("contacts", {
+  template: '<h1>{{title}}</h1>',
+  resolve: { title: 'My Contacts' },
+  controller: function($scope, title){
+    $scope.title = 'My Contacts';
+  },
+  onEnter: function(title){
+    if(title){ ... do something ... }
+  },
+  onExit: function(title){
+    if(title){ ... do something ... }
+  }
+})
+
+STATE CHANGE EVENTS.
+All these events are fired at $rootScope level.
+
+-> $stateChangeStart - fired when the transition begins.
+$rootScope.$on('$stateChangeStart', 
+function(event, toState, toParams, fromState, fromParams){ ... })
+
+we can use event.preventDefault() to prevent the transition from happening.
+$rootScope.$on('$stateChangeStart', 
+function(event, toState, toParams, fromState, fromParams){ 
+    event.preventDefault(); 
+    // transitionTo() promise will be rejected with 
+    // a 'transition prevented' error
+})
+
+-> $stateNotFound v0.3.0 - This is fired when the requested state can not be found. using the provided state during the transition.
+
+// somewhere, assume lazy.state has not been defined
+$state.go("lazy.state", {a:1, b:2}, {inherit:false});
+
+// somewhere else
+$rootScope.$on('$stateNotFound', 
+function(event, unfoundState, fromState, fromParams){ 
+    console.log(unfoundState.to); // "lazy.state"
+    console.log(unfoundState.toParams); // {a:1, b:2}
+    console.log(unfoundState.options); // {inherit:false} + default options
+})
+
+$stateChangeSuccess -> fired once the state transition is complete.
+
+$rootScope.$on('$stateChangeSuccess', 
+function(event, toState, toParams, fromState, fromParams){ ... })
 
 
 
