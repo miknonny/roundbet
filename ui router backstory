@@ -532,6 +532,14 @@ $stateChangeSuccess -> fired once the state transition is complete.
 $rootScope.$on('$stateChangeSuccess', 
 function(event, toState, toParams, fromState, fromParams){ ... })
 
+NESTED STATES AND NESTED VIEWS.
+
+Methods of nesting states.
+-> Using the dot notation.
+-> Using the ui-router.stateHelper to build states from the nested state tree.
+-> using the parent property.
+-> Using the parent property with the parent object.
+
 
 
 
