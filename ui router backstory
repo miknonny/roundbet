@@ -539,7 +539,153 @@ Methods of nesting states.
 -> Using the ui-router.stateHelper to build states from the nested state tree.
 -> using the parent property.
 -> Using the parent property with the parent object.
+1.)
+Dot Notation
+$stateProvider
+  .state('contacts', {})
+  .state('contacts.list', {});
+2.)
+State helper module.
+This is a third party module so you have to include it in addition to  ui-router.
 
+angular.module('myApp', ['ui.router', 'ui.router.stateHelper'])
+  .config(function(stateHelperProvider){
+    stateHelperProvider.setNestedState({
+      name: 'root',
+      templateUrl: 'root.html',
+      children: [
+        {
+          name: 'contacts',
+          templateUrl: 'contacts.html',
+          children: [
+            {
+              name: 'list',
+              templateUrl: 'contacts.list.html'
+            }
+          ]
+        },
+        {
+          name: 'products',
+          templateUrl: 'products.html',
+          children: [
+            {
+              name: 'list',
+              templateUrl: 'products.list.html'
+            }
+          ]
+        }
+      ]
+    });
+  });
+
+
+3.
+parent property using state name string.
+$stateProvider
+  .state('contacts', {})
+  .state('list', {
+    parent: 'contacts'
+  });
+
+ 4.
+
+Object based states.
+var contacts = { 
+    name: 'contacts',  //mandatory
+    templateUrl: 'contacts.html'
+}
+var contactsList = { 
+    name: 'contacts.list', //mandatory. This counter-intuitive requirement addressed in issue #368
+    parent: contacts,  //mandatory
+    templateUrl: 'contacts.list.html'
+}
+
+$stateProvider
+  .state(contacts)
+  .state(contactsList)
+
+
+Registering states.
+You can register states in any order. you can register states before the parents exists.
+
+Parent must exist.
+if you define a single state called contact.list, you must define a single state called contacts.
+
+
+Naming you states.
+No two states can have thesame name.
+-when using the dot notation the parent must be explcitly provided.
+-no two states can can thesame name even if their parents are different.
+
+
+
+Nested States and views.
+when a state is active,  all its ancestor states are implicitly active as well. when the contact.list state is active, the contacts state is active as well.
+
+
+What do child states inherit from their parent states?
+i Resolved dependencies via resolve.
+ii custom data properties.
+
+Inherited resolved dependencies.
+Child states can inherit resolved dependencies from parent which they can overide.
+
+$stateProvider.state('parent', {
+      resolve:{
+         resA:  function(){
+            return {'value': 'A'};
+         }
+      },
+      controller: function($scope, resA){
+          $scope.resA = resA.value;
+      }
+   })
+   .state('parent.child', {
+      resolve:{
+         resB: function(resA){
+            return {'value': resA.value + 'B'};
+         }
+      },
+      controller: function($scope, resA, resB){
+          $scope.resA2 = resA.value;
+          $scope.resB = resB.value;
+      }
+
+
+Scope inheritance by view only hierarchy.
+Scopes properties only inherit down the state if the view of your chian are nested. Inheritance of scope has nothing ot do with nesting of states. and everything to do with the nesting of your templates(views).
+
+
+ABSTRACT STATE.
+An abstract state can have a child state but can not get activated itself. you have to call one of the child state to be able to activate it.
+
+uses of abstact state.
+-uses to prepend a url to the child state.
+-to insert a template within its own ui-view that the child state will populate.
+- To provide a resolve dependency via resolve to use for child state.
+- to provided inherited custom data.
+
+Remember that abstract states need their own ui views for their children to plug into.
+
+$stateProvider
+    .state('contacts', {
+        abstract: true,
+        url: '/contacts',
+
+        // Note: abstract still needs a ui-view for its children to populate.
+        // You can simply add it inline here.
+        template: '<ui-view/>'
+    })
+    .state('contacts.list', {
+        // url will become '/contacts/list'
+        url: '/list'
+        //...more
+    })
+    .state('contacts.detail', {
+        // url will become '/contacts/detail'
+        url: '/detail',
+        //...more
+    })
 
 
 
