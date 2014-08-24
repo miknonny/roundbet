@@ -689,20 +689,131 @@ $stateProvider
 
 
 
+Nested Views.
+You can name your view so we call have more than one ui-view per template.
+
+- when setting up multiple views you need to use the views property on state. views is an object.
+
+if the views object is used your states templateUrl templateprovider and template will be ignored.
 
 
+An example of a multiple view. using name matching.
+
+<!-- index.html -->
+<body>
+  <div ui-view="filters"></div>
+  <div ui-view="tabledata"></div>
+  <div ui-view="graph"></div>
+</body>
+
+$stateProvider
+  .state('report', {
+    views: {
+      'filters': { ... templates and/or controllers ... },
+      'tabledata': {},
+      'graph': {},
+    }
+  })
+Note that each view can set up its own template url, template and template provider.
+$stateProvider
+  .state('report',{
+    views: {
+      'filters': {
+        templateUrl: 'report-filters.html',
+        controller: function($scope){ ... controller stuff just for filters view ... }
+      },
+      'tabledata': {
+        templateUrl: 'report-table.html',
+        controller: function($scope){ ... controller stuff just for tabledata view ... }
+      },
+      'graph': {
+        templateUrl: 'report-graph.html',
+        controller: function($scope){ ... controller stuff just for graph view ... }
+      },
+    }
+  })
 
 
+  View names. Relative Vs Absolute names.
+  Behind the scene every view gets assigned an absolute name that follows a scheme viewname@statename, where view is the name used in the view directive. and state name  is the absolute state name. eg. contact.item. you can also choose to write your view names using the absolute syntax.
+
+  .state('report',{
+    views: {
+      'filters@': { },
+      'tabledata@': { },
+      'graph@': { }
+    }
+  })
+
+this is same as the similar one. here the view is now expressed as absolute state instead of relative state.
 
 
+in the above example, there is nothing following the @. the root unamed state is your index.html.
 
+<!-- index.html (root unnamed template) -->
+<body ng-app>
+<div ui-view></div> <!-- contacts.html plugs in here -->
+<div ui-view="status"></div>
+</body>
 
+<!-- contacts.html -->
+<h1>My Contacts</h1>
+<div ui-view></div>
+<div ui-view="detail"></div>
 
+<!-- contacts.detail.html -->
+<h1>Contacts Details</h1>
+<div ui-view="info"></div>
 
+Now lets look at the different views that we could target. remember that if an @ is used that we could target only the root views.
 
+stateProvider
+  .state('contacts', {
+    // This will get automatically plugged into the unnamed ui-view 
+    // of the parent state template. Since this is a top level state, 
+    // its parent state template is index.html.
+    templateUrl: 'contacts.html'   
+  })
+  .state('contacts.detail', {
+    views: {
+        ////////////////////////////////////
+        // Relative Targeting             //
+        // Targets parent state ui-view's //
+        ////////////////////////////////////
 
+        // Relatively targets the 'detail' view in this state's parent state, 'contacts'.
+        // <div ui-view='detail'/> within contacts.html
+        "detail" : { },            
 
+        // Relatively targets the unnamed view in this state's parent state, 'contacts'.
+        // <div ui-view/> within contacts.html
+        "" : { }, 
 
+        ///////////////////////////////////////////////////////
+        // Absolute Targeting using '@'                      //
+        // Targets any view within this state or an ancestor //
+        ///////////////////////////////////////////////////////
+
+        // Absolutely targets the 'info' view in this state, 'contacts.detail'.
+        // <div ui-view='info'/> within contacts.detail.html
+        "info@contacts.detail" : { }
+
+        // Absolutely targets the 'detail' view in the 'contacts' state.
+        // <div ui-view='detail'/> within contacts.html
+        "detail@contacts" : { }
+
+        // Absolutely targets the unnamed view in parent 'contacts' state.
+        // <div ui-view/> within contacts.html
+        "@contacts" : { }
+
+        // absolutely targets the 'status' view in root unnamed state.
+        // <div ui-view='status'/> within index.html
+        "status@" : { }
+
+        // absolutely targets the unnamed view in root unnamed state.
+        // <div ui-view/> within index.html
+        "@" : { } 
+  });
 
 
 
