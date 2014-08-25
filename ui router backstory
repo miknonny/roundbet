@@ -1,13 +1,13 @@
 1. ui router backstory.
-2. current option, nrRoute, module.
+2. current option, ngRoute, module.
 3. Compare ngroute and ui.router.
 4. Nested states.
 5. state activation.
 6. How to activate a state.
-7. state urls
+7. state urls.
 8. Multiple named views.
 9. Abstract state.
-10. Challenges
+10. Challenges.
 11. resources.
 
 
@@ -817,11 +817,29 @@ stateProvider
 
 URL ROUTING.
 
+-> Url Parameters.
+the dynamic parts of urls are called parameters.
+A basic parameter looks like this.
+
+
+stateProvider
+	.state('contacts.detail', {
+		url: 'contacts/:contactId',
+		templateUrl: 'contacts.detail.html'
+		controller: function ($stateParams) {
+			//  if we got here from a url of  /contacts/42
+			expect($stateParams).toBe({contactId:42});
+		}
+	})
+
+Alternatively, we can use  curly braces.
+url: '/contacts/{contactId}'
 
 
 
+'/hello/' - this matches if the users name is exactly '/hello/' There are no special treatment for trailing slashes. this patterns have to match the entire path.
 
-
+'/user/:id' - '/user/bob' or '/user/1234!!!'. This second parameter will be captured as the parameter 'id'.
 
 
 
