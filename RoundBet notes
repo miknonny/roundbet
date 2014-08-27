@@ -23,7 +23,7 @@ naming of views in our config are necessary when we need to have differnet views
 
 -The views object in .state is used to add multiple views to one template. This allows you to split your page and render different views on different locations of your page.
 
-
+Note that if you have to use inline scripting. every inline script should be put in index.html and no other file.
 
 
 
