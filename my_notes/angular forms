@@ -1,0 +1,13 @@
+Angualar forms.
+Angular ptovides properties on forms that helps to validate them.
+1.
+property:$valid/class:ng-valid/boolean: this tells if an item is valid based on the rules that you placed.
+2. 
+property:$invalid/class:ng-invalid/boolean: this tells if an item is invalid based on the rules that you placed.
+3.
+property:$pristine/class:ng-prisitine/boolean: this is true if the form has not yet been used.
+4.property:$dirty/class:ng-dirty/boolean: this is true if the form has been used.
+
+required - This verifies form input has been filled out.
+ng-minLength={} -> verifies that a form is atleast a no of characters.
+
