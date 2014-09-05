@@ -3,3 +3,12 @@
 .button-padding {
 	padding: 10px;
 }
+
+.my-form input.ng-invalid.ng-dirty {
+	background-color: FA787E;
+}
+
+
+.my-form input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+ }

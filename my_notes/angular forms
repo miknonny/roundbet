@@ -1,5 +1,10 @@
+
+Very impoertant! - 
+You need to have the name of the controller in the form for validation to work.
+And the controller should be tied to the angular module app.
+
 Angualar forms.
-Angular ptovides properties on forms that helps to validate them.
+Angular provides properties on forms that helps to validate them.
 1.
 property:$valid/class:ng-valid/boolean: this tells if an item is valid based on the rules that you placed.
 2. 
@@ -10,4 +15,92 @@ property:$pristine/class:ng-prisitine/boolean: this is true if the form has not 
 
 required - This verifies form input has been filled out.
 ng-minLength={} -> verifies that a form is atleast a no of characters.
+
+ng-maxLength - verifies a form does not exceed the maximum length.
+
+pattern - This ensures that an input matches a regex pattern.
+
+Email - this validates an email address in input field.
+<input type="email" name="email" ng-model="user.email" />
+
+number - ensures input type is no.
+<input type="number" name="email" ng-model="user.age" />
+
+Url.
+Validates an input as a url.
+<input type="url" name="homepage" ng-model="user.facebook_url" />
+
+Custom validations.
+You can add validations by using directives. lets say we want to validate the username in a database.
+
+var app = angular.module('validationExample', []);
+
+app.directive('ensureUnique', ['$http', function ($http) {
+	return {
+		require: 'ngModel',
+		link: function (scope, elem, attrs, c) {
+			scope.$watch(attrs.ngModel, function () {
+				$http({
+					method: 'POST',
+					url: '/api/check' + attrs.ensureUnique,
+					data: {'field': attrs.ensureUnique}
+				}).success(function (data, status, headers, cfg) {
+					c.setValidity('unique', data.isUnique);
+				}).error(function (data, status, headers, cfg) {
+					c.setValidity('unique', false);
+				});
+			});
+		}
+	}
+}]);
+
+Control varaibles of on forms.
+Angular makes properties available  on the containing  scope Object as a result of a setting inside the DOM. This enables us to react to the form in realtime.
+
+formName.inputFieldName.property
+
+-> Unmodified form.
+A boolean value that tells us if the user has mnodified the form. this is regardless of the validation on the form.
+
+formName.inputFieldName.$pristine.
+Modified form.
+A boolean property set if and only if the user has modified the form.
+formName.inputFied.$dirty
+InvalidForm.
+Boolean property that tells us  if the form is invalid.
+formName.inputFieldName.$invalid.
+
+Erros.
+This object contains all the validations on a particular form if they are valid or invalid.
+
+formName.inputfieldName.$error.
+
+When angular is handling a form. it adds specific classes to the form based on the state. this class are named similar to properties.
+
+.ng-pristine {}
+.ng-dirty {}
+.ng-valid {}
+.ng-invalid {}
+
+
+
+
+
+
+
+
+From AngularJs docs.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
