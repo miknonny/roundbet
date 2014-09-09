@@ -1,7 +1,6 @@
-<ion-view title="Create Account">
+<ion-view title="Join">
 	<ion-content>
-	
-    <form name="userRegister" class="my-form" novalidate ng-submit="submitForm(userRegister.$valid)">
+    <form name="user_register" class="my-form" novalidate>
 		
         <div class="list">
 		  <label class="item item-input item-stacked-label">
@@ -9,17 +8,28 @@
 
 
 
-		    <input type="text" >
-	
+		    <input type="text" 
+		    ng-model="user.name" 
+		    name="user_name" 
+		    ng-minlength=3 
+		    required>
+			<div class="email-error-container"
+				ng-show="user_register.user_name.$dirty && user_register.user_name.$invalid">
+
+				<small class="error"
+					ng-show="user_register.user_name.$error.required">
+					Your name is required!
+				</small>
+			
+				<small class="error" 
+					ng-show="user_register.user_name.$error.minlength">
+					Username can not be less than 3 characters
+				</small>
+			</div>
 
 
           </label>
-		  <div class="error"
-		  	ng-show="userRegister.name.$dirty && userRegister.user_name.$invalid">
-		  	<small class="error" ng-show="userRegister.user_name.$error.required">
-		  		Your name is required.
-		  	</small>
-		 </div>
+
 		  <label class="item item-input item-stacked-label">
 		    <span class="input-label">Email</span>
 		    <input type="text" name="email"ng-model="email"
@@ -37,5 +47,6 @@
 		  </div>
 		</div>
 		</form>
+		</div>
 	</ion-content>
 </ion-view>

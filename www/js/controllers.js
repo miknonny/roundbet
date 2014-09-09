@@ -3,15 +3,8 @@
 angular.module('roundbet.controllers', [])
 
 	// This controls the Welcome page.
-	.controller('WelcomeCtrl', ['$scope', function ($scope) {
-
-		// Function to Submit form after all validation.
-		$scope.submitForm = function (isValid) {
-			if (isValid) {
-				alert('It worked!');
-			}
-		};
-		
+	.controller('WelcomeCtrl', ['$scope', function () {
+	
 	}])
 
 	// this Controls the  Login page.

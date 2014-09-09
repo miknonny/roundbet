@@ -1,0 +1,35 @@
+Round Bet notes.
+
+-multiple ion-view on template 
+There can be only one ion-view. unless you explicity specify which part of the screen that you want to the view to occupy.
+
+-ion-tab and state activation.
+ion-tab are dependent on state activation inorder to function. so you have to include either href or ui-sref.
+
+-ion-nav-view in parent and child templates.
+If you have <ion-nav-view> in the parent template, you do not need to include it in the child templates as this is often a cause of error in scripts. As pages will not be rendered proprely.
+
+-Title tag in ion-nav-view
+Do not add the title tag in the ion-nav-view,  add it in the ion-view for each template to be rendered.
+
+- Adding two templates in one parent. This can not work as it tries to render both at thesame time. for example i tried to add <ion-nav-view> for welcome page and login on thesame home.htm templates.
+
+-More on adding two templates in one parent.
+You can add two templated in one parent by using the script tag. As this templates will no longger have the homw template as their base template. everything will be included in the script.
+
+_Adding name tag to ion-nav-view.
+Name tags should be added to ion-nav-view and not the ion-view.
+naming of views in our config are necessary when we need to have differnet views on different parts of our page.
+
+-The views object in .state is used to add multiple views to one template. This allows you to split your page and render different views on different locations of your page.
+
+Note that if you have to use inline scripting. every inline script should be put in index.html and no other file.
+
+Make sure to include ion-content inside the ion-view. if ion-content not included the part of the content will not be shown
+
+
+
+
+
+
+
