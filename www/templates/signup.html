@@ -13,7 +13,7 @@
 		    name="user_name" 
 		    ng-minlength=3 
 		    required>
-			<div class="email-error-container"
+			<div class="username-error-container"
 				ng-show="user_register.user_name.$dirty && user_register.user_name.$invalid">
 
 				<small class="error"
@@ -32,16 +32,31 @@
 
 		  <label class="item item-input item-stacked-label">
 		    <span class="input-label">Email</span>
-		    <input type="text" name="email"ng-model="email"
-		    required
-		    placeholder="">
+		    
+		    <input type="email" 
+		    name="user_email" 
+		    ng-model="user.email"
+		    required>
+
+		    <div class="email-error-container"
+		    ng-show="user_register.user_email.$dirty && user_register.user_email.$invalid">
+		    	<small class="error"
+		    		ng-show="user_register.user_email.$error.required">
+		   			Please enter an email
+		    	</small>
+		    	<small class="error"
+		    		ng-show="user_register.user_email.$error.email">
+		   			This is not a valid email
+		    	</small>
+		    </div>
+		  
 		  </label>
 		  <label class="item item-input item-stacked-label">
 		    <span class="input-label">Password</span>
 		    <input type="text" ng-model="password" required placeholder="">
 		  </label>
 		  <div class="button-padding">
-		  <button type="submit" class="button button-block button-energized">
+		  <button type="submit" class="button button-block button-energized"> 
 	  		Submit
 		  </button>
 		  </div>
